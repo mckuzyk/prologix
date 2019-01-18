@@ -9,13 +9,17 @@ interface for writing to, reading from, and querying instruemnts.
 
 ### Usage
 
-Creat a communication line with an instrument by creating an instance of the
-prologix class.  A typical example would be
+Creat a communication line with an instrument through the prologix adapter.
+First open a line of communication with the prologix class, and then add
+instruments.  A typical example would be
 
 ```python
 
-# Create a communication line to an oscilloscope at GPIB address 5
-scope = prologix.prologix(gpib=5, port='COM3', baud=9600, timeout=3)
+# Create a prologix object 
+plx = prologix.prologix(port='COM3', baud=9600, timeout=3)
+
+# Creat a new instrument representing an oscilloscope at gpib address 5
+scope = plx.open_instrument(gpib_address = 5)
 
 # Query the oscilloscope with the message *IDN? to ask what model the scope is
 scope.query('*IDN?')
