@@ -1,7 +1,7 @@
 import serial
 import time
 
-class prologix(object):
+class Prologix(object):
 
     def __init__(self, port, baud=9600, timeout=3):
         self.inst = serial.Serial(port, baudrate=baud, timeout=timeout)
@@ -13,9 +13,9 @@ class prologix(object):
         self.inst.flush()
 
     def open_instrument(self, gpib_address):
-        return instrument(gpib_address, self.inst)
+        return Instrument(gpib_address, self.inst)
 
-class instrument(object):
+class Instrument(object):
 
     def __init__(self, gpib, serial_object):
         self.inst = serial_object
