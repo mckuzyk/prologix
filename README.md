@@ -16,7 +16,7 @@ instruments.  A typical example would be
 ```python
 
 # Create a prologix object 
-plx = prologix.prologix(port='COM3', baud=9600, timeout=3)
+plx = prologix.Prologix(port='COM3', baud=9600, timeout=3)
 
 # Creat a new instrument representing an oscilloscope at gpib address 5
 scope = plx.open_instrument(gpib_address = 5)
