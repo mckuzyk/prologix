@@ -35,11 +35,15 @@ class Instrument(object):
         self.inst.flush()
 
     def read(self):
+        counter = 0
         self.set_address()
         response = bytes()
         self.inst.write('++read\r'.encode('utf-8'))
         self.inst.flush()
-        time.sleep(.1)
+        while self.inst.in_waiting == 0:
+            counter += 1
+            if counter > 500:
+                raise RuntimeError('No response from instrument')
         while self.inst.in_waiting:
             response += self.inst.read(self.inst.in_waiting)
             time.sleep(.1)
@@ -47,7 +51,6 @@ class Instrument(object):
 
     def query(self, asciiMessage):
         self.write(asciiMessage)
-        time.sleep(.3)
         response = self.read()
         return response
 
