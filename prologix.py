@@ -47,7 +47,7 @@ class Instrument(object):
 
     def query(self, asciiMessage):
         self.write(asciiMessage)
-        time.sleep(.1)
+        time.sleep(.3)
         response = self.read()
         return response
 
