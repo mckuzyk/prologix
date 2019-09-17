@@ -55,6 +55,6 @@ class Instrument(object):
         response = self.read()
         response_list = response.decode('ascii')
         return np.array([float(response_list.split(',')[i]) for i 
-        in range(len(response_list)])
+        in range(len(response_list))])
 
 
