@@ -49,4 +49,11 @@ class Instrument(object):
         response = self.read()
         return response
 
+    def query_ascii_values(self, asciiMessage):
+        self.query(asciiMessage)
+        response = self.read()
+        response_list = response.decode('ascii')
+        return np.array([float(response_list.split(',')[i]) for i in
+        range_len(response_list)])
+
 
