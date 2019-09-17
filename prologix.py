@@ -54,7 +54,7 @@ class Instrument(object):
         self.query(asciiMessage)
         response = self.read()
         response_list = response.decode('ascii')
-        return np.array([float(response_list.split(',')[i]) for i in
-        range_len(response_list)])
+        return np.array([float(response_list.split(',')[i]) for i 
+        in range(len(response_list)])
 
 
