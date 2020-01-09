@@ -14,7 +14,7 @@ class Prologix(object):
         self.inst.flush()
 
     def open_instrument(self, gpib_address, write_termination='\r'):
-        return Instrument(gpib_address, self.inst)
+        return Instrument(gpib_address, write_termination, self.inst)
 
 class Instrument(object):
 
