@@ -13,14 +13,15 @@ class Prologix(object):
         self.inst.write('++auto 0\r'.encode('utf-8'))
         self.inst.flush()
 
-    def open_instrument(self, gpib_address):
+    def open_instrument(self, gpib_address, write_termination='\r'):
         return Instrument(gpib_address, self.inst)
 
 class Instrument(object):
 
-    def __init__(self, gpib, serial_object):
+    def __init__(self, gpib, write_termination, serial_object):
         self.inst = serial_object
         self.gpib = gpib
+        self.write_termination = write_termination
 
     def set_address(self):
         self.inst.write('++addr {}\r'.format(self.gpib).encode('utf-8'))
@@ -29,7 +30,7 @@ class Instrument(object):
 
     def write(self, asciiMessage):
         self.set_address()
-        asciiMessage += '\r'
+        asciiMessage += self.write_termination
         message = asciiMessage.encode('utf-8')
         self.inst.write(message)
         self.inst.flush()
