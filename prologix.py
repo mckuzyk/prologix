@@ -43,7 +43,8 @@ class Instrument(object):
         self.inst.flush()
         while self.inst.in_waiting == 0:
             counter += 1
-            if counter > 999999999:
+            time.sleep(1)
+            if counter > 3:
                 raise RuntimeError('No response from instrument')
         while self.inst.in_waiting:
             response += self.inst.read(self.inst.in_waiting)
